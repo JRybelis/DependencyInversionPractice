@@ -1,4 +1,6 @@
 ﻿using System;
+using DependencyInversionPractice.Interfaces;
+using DependencyInversionPractice.Loggers;
 
 namespace DependencyInversionPractice
 {
@@ -6,7 +8,9 @@ namespace DependencyInversionPractice
     {
         static void Main(string[] args)
         {
-            var shop = new Shop();
+            ILogger logger = new ConsoleLogger();
+;           
+            var shop = new Shop(logger); 
             
             shop.Buy("Earplugs");
 
