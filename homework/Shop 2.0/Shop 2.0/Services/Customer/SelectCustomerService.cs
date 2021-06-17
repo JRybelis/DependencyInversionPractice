@@ -8,23 +8,22 @@ using Shop_2._0.Models;
 
 namespace Shop_2._0.Services.Customer
 {
-    public class SelectCustomerAccountService
+    public class SelectCustomerService
     {
         private readonly IReader _reader;
         private readonly IWriter _writer;
         private readonly IClearer _clearer;
         private List<Models.Customer> _customers;
 
-        public SelectCustomerAccountService(IReader reader, IWriter writer, IClearer clearer)
+        public SelectCustomerService(IReader reader, IWriter writer, IClearer clearer, List<Models.Customer> customers)
         {
             _reader = reader;
             _writer = writer;
             _clearer = clearer;
+            _customers = customers;
         }
 
-        
-
-        Models.Customer SelectCustomer()
+          public Models.Customer SelectCustomer()
         {
             bool customerCheck = true;
             Models.Customer selectedCustomer = null;
@@ -65,14 +64,13 @@ namespace Shop_2._0.Services.Customer
                     else
                     {
                         Models.Customer newCustomer = new Models.Customer(0, firstNameToCheck, lastNameToCheck);
-                        _customers.Add(newCustomer);
-                        selectedCustomer = newCustomer;
 
+                        selectedCustomer = newCustomer;
+                        _customers.Add(newCustomer);
                         customerCheck = false;
                         return selectedCustomer;
                     }
                 }
-                
             }
             return selectedCustomer;
         }

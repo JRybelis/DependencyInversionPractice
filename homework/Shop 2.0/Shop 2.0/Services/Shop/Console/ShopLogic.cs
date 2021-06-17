@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
+
+using Shop_2._0.Services.Shop.Sale;
 
 namespace Shop_2._0.BusinessLogic
 {
     public class ShopLogic
     {
-        private IWriter _writer;
+        private readonly IWriter _writer;
+        private Customer _customer;
         private IDescriber _describer;
         private List<Item> _shopInventory;
+        private readonly SaleOperationService _saleOperationService;
+        private readonly SaleOperationOutputService _saleOperationOutputService;
         
 
-        public ShopLogic(IWriter writer, IDescriber describer, List<Item> shopInventory)
+        public ShopLogic(IWriter writer, IDescriber describer, List<Item> shopInventory, Customer customer)
         {
             _writer = writer;
             _describer = describer;
             _shopInventory = shopInventory;
+            _customer = customer;
         }
         public void ListInventory()
         {
@@ -35,71 +42,27 @@ namespace Shop_2._0.BusinessLogic
             _writer.Write("====================================================");
         }
 
-        public string Sell(object itemSold, int quantity, Customer customer)
+        public void Sell(object itemSold, int quantity, Customer customer)
         {
-            string saleOperation = "";
+
             switch (itemSold)
             {
                 case "book":
-                    var book = _shopInventory.FirstOrDefault(i => i is Book);
-                    if (book.Quantity < quantity)
-                    {
-                        saleOperation = $"Insufficient stock levels of {book}. Please offer the customer lower quantity or a substitute product.";
-                        break;
-                    } else if (book.Quantity * book.PriceDecimal > customer.AccountBalance)
-                    {
-                        saleOperation =
-                            "Insufficient customer account balance. Please offer a lower quantity or a substitute product.";
-                        break;
-                    }
-                    else
-                    {
-                        book.Quantity -= quantity;
-                        customer.AccountBalance -= quantity * book.PriceDecimal;
-                        break;
-                    } 
+                    var book = _shopInventory.FirstOrDefault(i => i is Book); 
+                    //_saleOperationService.SaleAttempt(book, quantity, customer);
+                    _saleOperationOutputService.SaleOutput(book, quantity, customer);
+                    break;
                 case "cup":
                     var cup = _shopInventory.FirstOrDefault(i => i is Cup);
-                    if (cup.Quantity < quantity)
-                    {
-                        saleOperation =
-                            $"Insufficient stock levels of {cup}. Please offer the customer lower quantity or a substitute product.";
-                        break;
-                    }
-                    else if (cup.Quantity * cup.PriceDecimal > customer.AccountBalance)
-                    {
-                        saleOperation =
-                            "Insufficient customer account balance. Please offer a lower quantity or a substitute product.";
-                        break;
-                    }
-                    else
-                    {
-                        cup.Quantity -= quantity;
-                        customer.AccountBalance -= quantity * cup.PriceDecimal;
-                        break;
-                    }
+                    //_saleOperationService.SaleAttempt(cup, quantity, customer);
+                    _saleOperationOutputService.SaleOutput(cup, quantity, customer);
+                    break;
                 case "sweet":
                     var sweet = _shopInventory.FirstOrDefault(i => i is Sweet);
-                    if (sweet.Quantity < quantity)
-                    {
-                        saleOperation = $"Insufficient stock levels of {sweet}. Please offer the customer lower quantity or a substitute product.";
-                        break;
-                    } else if (sweet.Quantity * sweet.PriceDecimal > customer.AccountBalance)
-                    {
-                        saleOperation =
-                            "Insufficient customer account balance. Please offer a lower quantity or a substitute product.";
-                        break;
-                    }
-                    else
-                    {
-                        sweet.Quantity -= quantity;
-                        customer.AccountBalance -= quantity * sweet.PriceDecimal;
-                        break;
-                    }
+                    //_saleOperationService.SaleAttempt(sweet, quantity, customer);
+                    _saleOperationOutputService.SaleOutput(sweet, quantity, customer);
+                    break;
             }
-
-            return saleOperation;
-
         }
 
        

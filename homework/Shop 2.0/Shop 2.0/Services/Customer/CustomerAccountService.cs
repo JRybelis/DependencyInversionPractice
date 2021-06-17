@@ -12,11 +12,12 @@ namespace Shop_2._0.Services.Customer
         private readonly IReader _reader;
         private readonly ShopUi _shopUi;
 
-        public CustomerAccountService(decimal accountBalance, string forename, string surname, IClearer clearer, IWriter writer, IReader reader) : base(accountBalance, forename, surname)
+        public CustomerAccountService(decimal accountBalance, string forename, string surname, IClearer clearer, IWriter writer, IReader reader, ShopUi shopUi) : base(accountBalance, forename, surname)
         {
             _clearer = clearer;
             _writer = writer;
             _reader = reader;
+            _shopUi = shopUi;
         }
         
         public void DisplayAccountBalance()
