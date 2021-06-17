@@ -12,7 +12,7 @@ namespace Shop_2._0.BusinessLogic
         private IWriter _writer;
         private IDescriber _describer;
         private List<Item> _shopInventory;
-        private Customer _customer;
+        
 
         public ShopLogic(IWriter writer, IDescriber describer, List<Item> shopInventory)
         {
@@ -35,27 +35,6 @@ namespace Shop_2._0.BusinessLogic
             _writer.Write("====================================================");
         }
 
-        public void Sale(string itemName, int quantity)
-        {
-            string saleOperation = ShopLogic.Sell(itemName, quantity, _customer);
-
-            if (saleOperation == "")
-            {
-                Console.WriteLine($"You have sold {quantity} of {itemName} to {_customer}.");
-            }
-            else
-            {
-                Console.WriteLine(saleOperation);
-            }
-        }
-
-        public void AddItems(string itemName, int quantity)
-        {
-            ShopLogic.AddItem(itemName, quantity);
-            Console.WriteLine($"You have added {quantity} {itemName}s to the shop inventory.");
-        }
-
-        
         public string Sell(object itemSold, int quantity, Customer customer)
         {
             string saleOperation = "";
@@ -123,7 +102,13 @@ namespace Shop_2._0.BusinessLogic
 
         }
 
-        
+       
+
+        public void AddItems(string itemName, int quantity)
+        {
+            ShopLogic.AddItem(itemName, quantity);
+            Console.WriteLine($"You have added {quantity} {itemName}s to the shop inventory.");
+        }
         public void AddItem(string itemName, int quantity)
         {
             switch (itemName)

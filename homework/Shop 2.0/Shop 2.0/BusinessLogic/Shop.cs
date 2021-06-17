@@ -4,6 +4,7 @@ using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
 using Shop_2._0.Services;
+using Shop_2._0.Services.Shop;
 using Shop_2._0.Services.Shop.Console;
 
 namespace Shop_2._0.BusinessLogic
@@ -17,6 +18,7 @@ namespace Shop_2._0.BusinessLogic
 
         private readonly ShopUi _shopUi;
         private readonly ShopLogic _shopLogic;
+        private readonly SaleOperationOutput _saleOperation; 
         
         private Customer _customer;
         private CustomerAccountService _customerAccountService;
@@ -60,7 +62,7 @@ namespace Shop_2._0.BusinessLogic
                         break;
                     case "s":
                         _clearer.Clear();
-                        Sale(menuSelections[1], int.Parse(menuSelections[2]));
+                        _saleOperation.SaleOutput(menuSelections[1], int.Parse(menuSelections[2]));
                         break;
                     case "b":
                         _clearer.Clear(); _customerAccountService.DisplayAccountBalance();
@@ -71,7 +73,7 @@ namespace Shop_2._0.BusinessLogic
                         break;
                     case "a":
                         _clearer.Clear();
-                        AddItems(menuSelections[1], int.Parse(menuSelections[2]));
+                        _shopLogic.AddItems(menuSelections[1], int.Parse(menuSelections[2]));
                         break;
                 }
             } while (menuSelections[0] != "c");
