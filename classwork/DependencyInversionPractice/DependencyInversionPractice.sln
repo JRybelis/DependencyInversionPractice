@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInversionPractice
 		{B7472F66-4AE9-4B0C-B961-3070810588D1} = {B7472F66-4AE9-4B0C-B961-3070810588D1}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop 2.0", "..\..\homework\Shop 2.0\Shop 2.0\Shop 2.0.csproj", "{B7472F66-4AE9-4B0C-B961-3070810588D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop 2.0", "..\..\homework\Shop 2.0\Shop 2.0\Shop 2.0.csproj", "{B7472F66-4AE9-4B0C-B961-3070810588D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
