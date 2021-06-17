@@ -10,19 +10,29 @@ namespace Shop_2._0.BusinessLogic
     public class ShopLogic
     {
         private IWriter _writer;
+        private IDescriber _describer;
         private List<Item> _shopInventory;
         private Customer _customer;
+
+        public ShopLogic(IWriter writer, IDescriber describer, List<Item> shopInventory)
+        {
+            _writer = writer;
+            _describer = describer;
+            _shopInventory = shopInventory;
+        }
         public void ListInventory()
         {
+               
             _writer.Write("                  Shop inventory:                   ");
-            Console.WriteLine("====================================================");
-            Console.WriteLine();
+            _writer.Write("====================================================");
+            _writer.Write("");
+            
             foreach (var item in _shopInventory)
             {
-                Console.WriteLine($"{item.Name}, £{item.PriceDecimal}, in stock: {item.Quantity}.");
+                _writer.Write($"{item.Name}, £{item.PriceDecimal}, in stock: {item.Quantity}.");
             }
-            Console.WriteLine();
-            Console.WriteLine("====================================================");
+            _writer.Write("");
+            _writer.Write("====================================================");
         }
 
         public void Sale(string itemName, int quantity)
@@ -52,7 +62,7 @@ namespace Shop_2._0.BusinessLogic
             switch (itemSold)
             {
                 case "book":
-                    var book = ShopInventory.FirstOrDefault(i => i is Book);
+                    var book = _shopInventory.FirstOrDefault(i => i is Book);
                     if (book.Quantity < quantity)
                     {
                         saleOperation = $"Insufficient stock levels of {book}. Please offer the customer lower quantity or a substitute product.";
@@ -70,7 +80,7 @@ namespace Shop_2._0.BusinessLogic
                         break;
                     } 
                 case "cup":
-                    var cup = ShopInventory.FirstOrDefault(i => i is Cup);
+                    var cup = _shopInventory.FirstOrDefault(i => i is Cup);
                     if (cup.Quantity < quantity)
                     {
                         saleOperation =
@@ -90,7 +100,7 @@ namespace Shop_2._0.BusinessLogic
                         break;
                     }
                 case "sweet":
-                    var sweet = ShopInventory.FirstOrDefault(i => i is Sweet);
+                    var sweet = _shopInventory.FirstOrDefault(i => i is Sweet);
                     if (sweet.Quantity < quantity)
                     {
                         saleOperation = $"Insufficient stock levels of {sweet}. Please offer the customer lower quantity or a substitute product.";
@@ -119,15 +129,15 @@ namespace Shop_2._0.BusinessLogic
             switch (itemName)
             {
                 case "book":
-                    var book = ShopInventory.FirstOrDefault(i => i is Book);
+                    var book = _shopInventory.FirstOrDefault(i => i is Book);
                     book.Quantity += quantity;
                     break;
                 case "cup":
-                    var cup = ShopInventory.FirstOrDefault(i => i is Cup);
+                    var cup = _shopInventory.FirstOrDefault(i => i is Cup);
                     cup.Quantity += quantity;
                     break;
                 case "sweet":
-                    var sweet = ShopInventory.First(i => i is Sweet);
+                    var sweet = _shopInventory.First(i => i is Sweet);
                     sweet.Quantity += quantity;
                     break;
             }

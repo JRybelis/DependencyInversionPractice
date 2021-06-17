@@ -16,6 +16,7 @@ namespace Shop_2._0.BusinessLogic
         private bool _isOpen = false;
 
         private readonly ShopUi _shopUi;
+        private readonly ShopLogic _shopLogic;
         
         private Customer _customer;
         private CustomerAccountService _customerAccountService;
@@ -34,7 +35,7 @@ namespace Shop_2._0.BusinessLogic
             }
 
             _isOpen = true;
-            _shopInventory = ShopLogic.ShopInventory;
+            //_shopInventory = ShopLogic;
             _customer = new Customer();
         }
 
@@ -55,8 +56,7 @@ namespace Shop_2._0.BusinessLogic
                 {
                     case "l":
                         _clearer.Clear();
-                        //Console.Clear();
-                        ShopLogic.ListInventory();
+                        _shopLogic.ListInventory();
                         break;
                     case "s":
                         _clearer.Clear();
@@ -116,7 +116,5 @@ namespace Shop_2._0.BusinessLogic
                 PriceDecimal = 6.66M
             }
         };
-        
-        
     }
 }
