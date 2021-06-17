@@ -11,18 +11,19 @@ namespace Shop_2._0.Services.Shop.Sale
         private int _quantity;
         
 
-        public SaleOperationService(Models.Customer customer, Item item, int quantity)
+        public SaleOperationService(SelectCustomerService selectCustomerService, Item item, int quantity)
         {
+            _selectCustomerService = selectCustomerService;
             _item = item;
             this._quantity = quantity;
         }
-        public string SaleAttempt(Item stockItem, int quantity, Models.Customer customer)
+        public string SaleAttempt(Item stockItem, int quantity, SelectCustomerService selectedCustomer)
         {
-            customer = _selectCustomerService.SelectCustomer();
+            Models.Customer customer = _selectCustomerService.SelectCustomer();
 
             string saleOperation = "";
             string insufficientStock = $"Insufficient stock levels of {stockItem}. Please offer the customer lower quantity or a substitute product.";
-            string insufficientBalance = "Insufficient customer account balance. Please offer a lower quantity or a substitute product.";
+            string insufficientBalance = $"Insufficient {customer} account balance. Please offer a lower quantity or a substitute product.";
 
             if (stockItem.Quantity < quantity)
             {

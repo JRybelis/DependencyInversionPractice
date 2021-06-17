@@ -10,16 +10,15 @@ namespace Shop_2._0.Services.Customer
         private readonly IClearer _clearer;
         private readonly IWriter _writer;
         private readonly IReader _reader;
-        private readonly ShopUi _shopUi;
+        private readonly ReturnToMainMenuService _returnToMainMenuService;
 
-        public CustomerAccountService(decimal accountBalance, string forename, string surname, IClearer clearer, IWriter writer, IReader reader, ShopUi shopUi) : base(accountBalance, forename, surname)
+        public CustomerAccountService(decimal accountBalance, string forename, string surname, IClearer clearer, IWriter writer, IReader reader, ReturnToMainMenuService returnToMainMenuService) : base(accountBalance, forename, surname)
         {
             _clearer = clearer;
             _writer = writer;
             _reader = reader;
-            _shopUi = shopUi;
+            _returnToMainMenuService = returnToMainMenuService;
         }
-        
         public void DisplayAccountBalance()
         {
             _clearer.Clear();
@@ -34,7 +33,7 @@ namespace Shop_2._0.Services.Customer
                 else
                 {
                     _writer.Write("Returning to main menu:");
-                    _shopUi.MainMenu();
+                    _returnToMainMenuService.ReturnToMainMenu();
                 }
             }
             catch (Exception e)

@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
-
+using Shop_2._0.Services.Customer;
 using Shop_2._0.Services.Shop.Sale;
 
 namespace Shop_2._0.BusinessLogic
@@ -42,25 +42,22 @@ namespace Shop_2._0.BusinessLogic
             _writer.Write("====================================================");
         }
 
-        public void Sell(object itemSold, int quantity, Customer customer)
+        public void Sell(object itemSold, int quantity, SelectCustomerService selectedCustomer)
         {
 
             switch (itemSold)
             {
                 case "book":
                     var book = _shopInventory.FirstOrDefault(i => i is Book); 
-                    //_saleOperationService.SaleAttempt(book, quantity, customer);
-                    _saleOperationOutputService.SaleOutput(book, quantity, customer);
+                    _saleOperationOutputService.SaleOutput(book, quantity, selectedCustomer);
                     break;
                 case "cup":
                     var cup = _shopInventory.FirstOrDefault(i => i is Cup);
-                    //_saleOperationService.SaleAttempt(cup, quantity, customer);
-                    _saleOperationOutputService.SaleOutput(cup, quantity, customer);
+                    _saleOperationOutputService.SaleOutput(cup, quantity, selectedCustomer);
                     break;
                 case "sweet":
                     var sweet = _shopInventory.FirstOrDefault(i => i is Sweet);
-                    //_saleOperationService.SaleAttempt(sweet, quantity, customer);
-                    _saleOperationOutputService.SaleOutput(sweet, quantity, customer);
+                    _saleOperationOutputService.SaleOutput(sweet, quantity, selectedCustomer);
                     break;
             }
         }

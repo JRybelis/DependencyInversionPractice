@@ -33,7 +33,6 @@ namespace Shop_2._0.Services.Customer
 
             while (customerCheck)
             {
-                
                 string[] nameToCheck = new string[2];
                 
                 try

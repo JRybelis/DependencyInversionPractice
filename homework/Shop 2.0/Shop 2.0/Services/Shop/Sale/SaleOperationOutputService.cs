@@ -1,6 +1,7 @@
 ﻿using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
+using Shop_2._0.Services.Customer;
 using Shop_2._0.Services.Shop.Console;
 
 namespace Shop_2._0.Services.Shop.Sale
@@ -18,13 +19,13 @@ namespace Shop_2._0.Services.Shop.Sale
             _returnToMainMenuService = returnToMainMenuService;
         }
         
-        public void SaleOutput(Item itemName, int quantity, Models.Customer customer)
+        public void SaleOutput(Item itemName, int quantity, SelectCustomerService selectedCustomer)
         {
-            string saleOperation = _saleOperationService.SaleAttempt(itemName, quantity, customer);
+            string saleOperation = _saleOperationService.SaleAttempt(itemName, quantity, selectedCustomer);
                 
             if (saleOperation == "")
             {
-                _writer.Write($"You have sold {quantity} of {itemName} to {customer}.");
+                _writer.Write($"You have sold {quantity} of {itemName} to {selectedCustomer}.");
                 _returnToMainMenuService.ReturnToMainMenu();
             }
             else
