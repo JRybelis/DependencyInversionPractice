@@ -13,23 +13,20 @@ namespace Shop_2._0.BusinessLogic
     public class ShopLogic
     {
         private readonly IWriter _writer;
-        private Customer _customer;
-        private IDescriber _describer;
+        //private IDescriber _describer;
         private List<Item> _shopInventory;
         private readonly SaleOperationService _saleOperationService;
         private readonly SaleOperationOutputService _saleOperationOutputService;
         
 
-        public ShopLogic(IWriter writer, IDescriber describer, List<Item> shopInventory, Customer customer)
+        public ShopLogic(IWriter writer/*, IDescriber describer*/, List<Item> shopInventory)
         {
             _writer = writer;
-            _describer = describer;
+            //_describer = describer;
             _shopInventory = shopInventory;
-            _customer = customer;
         }
         public void ListInventory()
         {
-               
             _writer.Write("                  Shop inventory:                   ");
             _writer.Write("====================================================");
             _writer.Write("");

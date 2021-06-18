@@ -3,52 +3,43 @@ using System.Collections.Generic;
 using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
-using Shop_2._0.Services;
 using Shop_2._0.Services.Customer;
 using Shop_2._0.Services.Shop;
 using Shop_2._0.Services.Shop.Console;
-using Shop_2._0.Services.Shop.Sale;
 
 namespace Shop_2._0.BusinessLogic
 {
     internal class Shop
     {
-        private IWriter _writer;
-        private IClearer _clearer;
-        private IReader _reader;
-        private bool _isOpen = false;
-
+        private readonly IWriter _writer;
+        private readonly IClearer _clearer;
+        private bool _isOpen;
         private readonly ShopUi _shopUi;
         private readonly ShopLogic _shopLogic;
         private readonly AddItemsService _addItemsService;
-        private readonly SaleOperationOutputService _saleOperation;
-
         private readonly SelectCustomerService _selectCustomerService;
-        private CustomerAccountService _customerAccountService;
-        private readonly string _name;
+        private readonly CustomerAccountService _customerAccountService;
 
-        public Shop(IWriter writer, IClearer clearer, IReader reader, bool isOpen, ShopUi shopUi, ShopLogic shopLogic, SaleOperationOutputService saleOperation, SelectCustomerService selectCustomerService, CustomerAccountService customerAccountService, string name)
+        public Shop(IWriter writer, IClearer clearer, bool isOpen, ShopUi shopUi, ShopLogic shopLogic, SelectCustomerService selectCustomerService, CustomerAccountService customerAccountService, AddItemsService addItemsService)
         {
+            
             _writer = writer;
             _clearer = clearer;
-            _reader = reader;
             _isOpen = isOpen;
             _shopUi = shopUi;
             _shopLogic = shopLogic;
-            _saleOperation = saleOperation;
             _selectCustomerService = selectCustomerService;
             _customerAccountService = customerAccountService;
-            _name = name;
-
+            _addItemsService = addItemsService;
+        }
+       
+        public void Open()
+        {
             if (_isOpen)
             {
                 throw new Exception("The shop manager app is already running.");
             }
             _isOpen = true;
-        }
-       
-        public void Open()
-        {
             _writer.Write("Welcome to Lancaster Sweet Shoppe!");
             
             string[] menuSelections;
