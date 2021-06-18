@@ -44,7 +44,6 @@ namespace Shop_2._0.BusinessLogic
 
         public void Sell(object itemSold, int quantity, SelectCustomerService selectedCustomer)
         {
-
             switch (itemSold)
             {
                 case "book":
@@ -62,14 +61,7 @@ namespace Shop_2._0.BusinessLogic
             }
         }
 
-       
-
-        public void AddItems(string itemName, int quantity)
-        {
-            ShopLogic.AddItem(itemName, quantity);
-            Console.WriteLine($"You have added {quantity} {itemName}s to the shop inventory.");
-        }
-        public void AddItem(string itemName, int quantity)
+       public void AddItem(string itemName, int quantity)
         {
             switch (itemName)
             {

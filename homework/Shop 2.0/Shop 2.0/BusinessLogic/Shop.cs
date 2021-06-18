@@ -20,34 +20,33 @@ namespace Shop_2._0.BusinessLogic
 
         private readonly ShopUi _shopUi;
         private readonly ShopLogic _shopLogic;
-        private readonly SaleOperationOutputService _saleOperation; 
-        
-        private Customer _customer;
+        private readonly AddItemsService _addItemsService;
+        private readonly SaleOperationOutputService _saleOperation;
+
+        private readonly SelectCustomerService _selectCustomerService;
         private CustomerAccountService _customerAccountService;
         private readonly string _name;
 
-        public Shop(IWriter writer, IClearer clearer, IReader reader, ShopUi ui)
+        public Shop(IWriter writer, IClearer clearer, IReader reader, bool isOpen, ShopUi shopUi, ShopLogic shopLogic, SaleOperationOutputService saleOperation, SelectCustomerService selectCustomerService, CustomerAccountService customerAccountService, string name)
         {
             _writer = writer;
             _clearer = clearer;
             _reader = reader;
-            _shopUi = ui;
-            
+            _isOpen = isOpen;
+            _shopUi = shopUi;
+            _shopLogic = shopLogic;
+            _saleOperation = saleOperation;
+            _selectCustomerService = selectCustomerService;
+            _customerAccountService = customerAccountService;
+            _name = name;
+
             if (_isOpen)
             {
                 throw new Exception("The shop manager app is already running.");
             }
-
             _isOpen = true;
-            //_shopInventory = ShopLogic;
-            _customer = new Customer();
         }
-
-        //public ShopUi() : this("Bay Flea Market")
-        //{
-
-        //}
-
+       
         public void Open()
         {
             _writer.Write("Welcome to Lancaster Sweet Shoppe!");
@@ -64,19 +63,18 @@ namespace Shop_2._0.BusinessLogic
                         break;
                     case "s":
                         _clearer.Clear();
-                        //_saleOperation.SaleOutput(menuSelections[1], int.Parse(menuSelections[2]));
-                        _shopLogic.Sell(menuSelections[1], int.Parse(menuSelections[2])); //cia tikrinam
+                        _shopLogic.Sell(menuSelections[1], int.Parse(menuSelections[2]), _selectCustomerService);
                         break;
                     case "b":
                         _clearer.Clear(); _customerAccountService.DisplayAccountBalance();
                         break;
                     case "t":
                         _clearer.Clear();
-                        _customerAccountService.AccountTopUp(decimal.Parse(menuSelections[1]));
+                        _customerAccountService.AccountTopUp();
                         break;
                     case "a":
                         _clearer.Clear();
-                        _shopLogic.AddItems(menuSelections[1], int.Parse(menuSelections[2]));
+                        _addItemsService.AddItems(menuSelections[1], int.Parse(menuSelections[2]));
                         break;
                 }
             } while (menuSelections[0] != "c");
