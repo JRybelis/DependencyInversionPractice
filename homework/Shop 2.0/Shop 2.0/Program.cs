@@ -6,7 +6,7 @@ using Shop_2._0.Interfaces;
 using Shop_2._0.Loggers;
 using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
-using Shop_2._0.Services.Customer;
+using Shop_2._0.Services.CustomerServices;
 using Shop_2._0.Services.Shop;
 using Shop_2._0.Services.Shop.Console;
 

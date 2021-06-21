@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 
-namespace Shop_2._0.Services.Customer
+namespace Shop_2._0.Services.CustomerServices
 {
     public class SelectCustomerService
     {

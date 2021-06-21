@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
-using Shop_2._0.Services.Customer;
+using Shop_2._0.Services.CustomerServices;
 using Shop_2._0.Services.Shop.Sale;
 
 namespace Shop_2._0.BusinessLogic

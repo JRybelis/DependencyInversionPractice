@@ -1,6 +1,6 @@
 ﻿using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
-using Shop_2._0.Services.Customer;
+using Shop_2._0.Services.CustomerServices;
 
 namespace Shop_2._0.Services.Shop.Sale
 {

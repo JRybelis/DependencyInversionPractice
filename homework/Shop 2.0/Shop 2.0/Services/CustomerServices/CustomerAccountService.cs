@@ -1,11 +1,12 @@
 ﻿using System;
 using Shop_2._0.Interfaces;
+using Shop_2._0.Models;
 using Shop_2._0.Services.Shop.Console;
 using static System.Decimal;
 
-namespace Shop_2._0.Services.Customer
+namespace Shop_2._0.Services.CustomerServices
 {
-    public class CustomerAccountService : Models.Customer
+    public class CustomerAccountService : Customer
     {
         private readonly IClearer _clearer;
         private readonly IWriter _writer;
