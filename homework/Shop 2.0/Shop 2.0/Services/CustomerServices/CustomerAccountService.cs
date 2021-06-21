@@ -2,7 +2,6 @@
 using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 using Shop_2._0.Services.Shop.Console;
-using static System.Decimal;
 
 namespace Shop_2._0.Services.CustomerServices
 {
@@ -45,7 +44,7 @@ namespace Shop_2._0.Services.CustomerServices
         public void AccountTopUp()
         {
             _writer.Write("Please enter the amount to top up by: $$.¢¢");
-            decimal topUpAmount = Parse(_reader.Read());
+            decimal topUpAmount = decimal.Parse(_reader.Read());
 
             AccountBalance += topUpAmount;
             _writer.Write($"The deposit of {topUpAmount} has been accepted.");

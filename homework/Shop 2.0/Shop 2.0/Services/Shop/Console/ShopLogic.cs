@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using Shop_2._0.Data;
 using Shop_2._0.Interfaces;
 using Shop_2._0.Models;
 using Shop_2._0.Models.Base;
@@ -14,24 +15,25 @@ namespace Shop_2._0.BusinessLogic
     {
         private readonly IWriter _writer;
         //private IDescriber _describer;
-        private List<Item> _shopInventory;
-        private readonly SaleOperationService _saleOperationService;
+        private List<Item> _testData;
         private readonly SaleOperationOutputService _saleOperationOutputService;
         
 
-        public ShopLogic(IWriter writer/*, IDescriber describer*/, List<Item> shopInventory)
+        public ShopLogic(IWriter writer/*, IDescriber describer*/, List<Item> testData, SaleOperationOutputService saleOperationOutputService)
         {
             _writer = writer;
             //_describer = describer;
-            _shopInventory = shopInventory;
+            _testData = testData;
+            _saleOperationOutputService = saleOperationOutputService;
         }
         public void ListInventory()
         {
+            var shopItems = _testData;
             _writer.Write("                  Shop inventory:                   ");
             _writer.Write("====================================================");
             _writer.Write("");
             
-            foreach (var item in _shopInventory)
+            foreach (var item in _testData)
             {
                 _writer.Write($"{item.Name}, £{item.PriceDecimal}, in stock: {item.Quantity}.");
             }
@@ -41,18 +43,19 @@ namespace Shop_2._0.BusinessLogic
 
         public void Sell(object itemSold, int quantity, SelectCustomerService selectedCustomer)
         {
+            var shopItems = _testData;
             switch (itemSold)
-            {
+            { 
                 case "book":
-                    var book = _shopInventory.FirstOrDefault(i => i is Book); 
+                    var book = shopItems.FirstOrDefault(i => i is Book); 
                     _saleOperationOutputService.SaleOutput(book, quantity, selectedCustomer);
                     break;
                 case "cup":
-                    var cup = _shopInventory.FirstOrDefault(i => i is Cup);
+                    var cup = shopItems.FirstOrDefault(i => i is Cup);
                     _saleOperationOutputService.SaleOutput(cup, quantity, selectedCustomer);
                     break;
                 case "sweet":
-                    var sweet = _shopInventory.FirstOrDefault(i => i is Sweet);
+                    var sweet = shopItems.FirstOrDefault(i => i is Sweet);
                     _saleOperationOutputService.SaleOutput(sweet, quantity, selectedCustomer);
                     break;
             }
@@ -60,18 +63,19 @@ namespace Shop_2._0.BusinessLogic
 
        public void AddItem(string itemName, int quantity)
         {
+            var shopItems = _testData;
             switch (itemName)
             {
                 case "book":
-                    var book = _shopInventory.FirstOrDefault(i => i is Book);
+                    var book = shopItems.FirstOrDefault(i => i is Book);
                     book.Quantity += quantity;
                     break;
                 case "cup":
-                    var cup = _shopInventory.FirstOrDefault(i => i is Cup);
+                    var cup = shopItems.FirstOrDefault(i => i is Cup);
                     cup.Quantity += quantity;
                     break;
                 case "sweet":
-                    var sweet = _shopInventory.First(i => i is Sweet);
+                    var sweet = shopItems.First(i => i is Sweet);
                     sweet.Quantity += quantity;
                     break;
             }

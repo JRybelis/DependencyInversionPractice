@@ -12,19 +12,19 @@ namespace Shop_2._0.Services.CustomerServices
     {
         private readonly IReader _reader;
         private readonly IWriter _writer;
-        private List<Models.Customer> _customers;
+        private List<Customer> _testData;
 
-        public SelectCustomerService(IReader reader, IWriter writer, List<Models.Customer> customers)
+        public SelectCustomerService(IReader reader, IWriter writer, List<Customer> testData)
         {
             _reader = reader;
             _writer = writer;
-            _customers = customers;
+            _testData = testData;
         }
 
-          public Models.Customer SelectCustomer()
+          public Customer SelectCustomer()
         {
             bool customerCheck = true;
-            Models.Customer selectedCustomer = null;
+            Customer selectedCustomer = null;
 
             _writer.Clear();
             _writer.Write("Please enter the customer's first and last name: ");
@@ -50,7 +50,7 @@ namespace Shop_2._0.Services.CustomerServices
                 string firstNameToCheck = nameToCheck[0];
                 string lastNameToCheck = nameToCheck[1];
 
-                foreach (var customer in _customers)
+                foreach (var customer in _testData)
                 {
                     if (firstNameToCheck == customer.Forename && lastNameToCheck == customer.Surname)
                     {
@@ -60,10 +60,10 @@ namespace Shop_2._0.Services.CustomerServices
                     }
                     else
                     {
-                        Models.Customer newCustomer = new Models.Customer(0, firstNameToCheck, lastNameToCheck);
+                        Customer newCustomer = new Customer(0, firstNameToCheck, lastNameToCheck);
 
                         selectedCustomer = newCustomer;
-                        _customers.Add(newCustomer);
+                        _testData.Add(newCustomer);
                         customerCheck = false;
                         return selectedCustomer;
                     }

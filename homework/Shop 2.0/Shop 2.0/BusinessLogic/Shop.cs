@@ -68,45 +68,5 @@ namespace Shop_2._0.BusinessLogic
                 }
             } while (menuSelections[0] != "c");
         }
-
-        public static List<Item> ShopInventory = new List<Item>()
-        {
-            new Book()
-            {
-                Name = "The Unofficial Holy Bible for Minecrafters. A children's guide to the Old & New Testament",
-                Quantity = 7,
-                PriceDecimal = 25.49M
-            },
-            new Book()
-            {
-                Name = "The Action Bible. God's redemptive story.",
-                Quantity = 1,
-                PriceDecimal = 30.00M
-            },
-            new Sweet()
-            {
-                Name = "A little tin of sheep poo",
-                Quantity = 20,
-                PriceDecimal = 9.99M
-            },
-            new Sweet()
-            {
-                Name = "Fudge",
-                Quantity = 40,
-                PriceDecimal = 3.75M
-            },
-            new Sweet()
-            {
-                Name = "Brittle",
-                Quantity = 80,
-                PriceDecimal = 5.95M
-            },
-            new Cup()
-            {
-                Name = "Jacob's poison",
-                Quantity = 13,
-                PriceDecimal = 6.66M
-            }
-        };
     }
 }

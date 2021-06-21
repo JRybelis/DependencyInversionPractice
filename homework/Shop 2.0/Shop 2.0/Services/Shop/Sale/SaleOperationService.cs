@@ -19,7 +19,7 @@ namespace Shop_2._0.Services.Shop.Sale
         }
         public string SaleAttempt(Item stockItem, int quantity, SelectCustomerService selectedCustomer)
         {
-            Models.Customer customer = _selectCustomerService.SelectCustomer();
+            Customer customer = _selectCustomerService.SelectCustomer();
 
             string saleOperation = "";
             string insufficientStock = $"Insufficient stock levels of {stockItem}. Please offer the customer lower quantity or a substitute product.";
