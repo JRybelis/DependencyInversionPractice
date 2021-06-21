@@ -12,14 +12,12 @@ namespace Shop_2._0.Services.CustomerServices
     {
         private readonly IReader _reader;
         private readonly IWriter _writer;
-        private readonly IClearer _clearer;
         private List<Models.Customer> _customers;
 
-        public SelectCustomerService(IReader reader, IWriter writer, IClearer clearer, List<Models.Customer> customers)
+        public SelectCustomerService(IReader reader, IWriter writer, List<Models.Customer> customers)
         {
             _reader = reader;
             _writer = writer;
-            _clearer = clearer;
             _customers = customers;
         }
 
@@ -28,7 +26,7 @@ namespace Shop_2._0.Services.CustomerServices
             bool customerCheck = true;
             Models.Customer selectedCustomer = null;
 
-            _clearer.Clear();
+            _writer.Clear();
             _writer.Write("Please enter the customer's first and last name: ");
 
             while (customerCheck)

@@ -8,21 +8,19 @@ namespace Shop_2._0.Services.CustomerServices
 {
     public class CustomerAccountService : Customer
     {
-        private readonly IClearer _clearer;
         private readonly IWriter _writer;
         private readonly IReader _reader;
         private readonly ReturnToMainMenuService _returnToMainMenuService;
 
-        public CustomerAccountService(decimal accountBalance, string forename, string surname, IClearer clearer, IWriter writer, IReader reader, ReturnToMainMenuService returnToMainMenuService) : base(accountBalance, forename, surname)
+        public CustomerAccountService(decimal accountBalance, string forename, string surname, IWriter writer, IReader reader, ReturnToMainMenuService returnToMainMenuService) : base(accountBalance, forename, surname)
         {
-            _clearer = clearer;
             _writer = writer;
             _reader = reader;
             _returnToMainMenuService = returnToMainMenuService;
         }
         public void DisplayAccountBalance()
         {
-            _clearer.Clear();
+            _writer.Clear();
             _writer.Write($"The customer's current account balance is at £{AccountBalance}. Would you like to top up? Y/N");
             try
             {

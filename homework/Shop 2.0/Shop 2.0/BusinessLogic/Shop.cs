@@ -12,7 +12,6 @@ namespace Shop_2._0.BusinessLogic
     internal class Shop
     {
         private readonly IWriter _writer;
-        private readonly IClearer _clearer;
         private bool _isOpen;
         private readonly ShopUi _shopUi;
         private readonly ShopLogic _shopLogic;
@@ -20,11 +19,10 @@ namespace Shop_2._0.BusinessLogic
         private readonly SelectCustomerService _selectCustomerService;
         private readonly CustomerAccountService _customerAccountService;
 
-        public Shop(IWriter writer, IClearer clearer, bool isOpen, ShopUi shopUi, ShopLogic shopLogic, SelectCustomerService selectCustomerService, CustomerAccountService customerAccountService, AddItemsService addItemsService)
+        public Shop(IWriter writer, bool isOpen, ShopUi shopUi, ShopLogic shopLogic, SelectCustomerService selectCustomerService, CustomerAccountService customerAccountService, AddItemsService addItemsService)
         {
             
             _writer = writer;
-            _clearer = clearer;
             _isOpen = isOpen;
             _shopUi = shopUi;
             _shopLogic = shopLogic;
@@ -49,22 +47,22 @@ namespace Shop_2._0.BusinessLogic
                 switch (menuSelections[0])
                 {
                     case "l":
-                        _clearer.Clear();
+                        _writer.Clear();
                         _shopLogic.ListInventory();
                         break;
                     case "s":
-                        _clearer.Clear();
+                        _writer.Clear();
                         _shopLogic.Sell(menuSelections[1], int.Parse(menuSelections[2]), _selectCustomerService);
                         break;
                     case "b":
-                        _clearer.Clear(); _customerAccountService.DisplayAccountBalance();
+                        _writer.Clear(); _customerAccountService.DisplayAccountBalance();
                         break;
                     case "t":
-                        _clearer.Clear();
+                        _writer.Clear();
                         _customerAccountService.AccountTopUp();
                         break;
                     case "a":
-                        _clearer.Clear();
+                        _writer.Clear();
                         _addItemsService.AddItems(menuSelections[1], int.Parse(menuSelections[2]));
                         break;
                 }

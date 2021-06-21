@@ -18,20 +18,19 @@ namespace Shop_2._0
         {
             IWriter writer = new ConsoleLogger();
             IReader reader = new ConsoleLogger();
-            IClearer clearer = new ConsoleLogger();
             ShopUi shopUi = new ShopUi(writer, reader);
             ShopLogic shopLogic = new ShopLogic(writer, new List<Item>());
             SelectCustomerService selectCustomerService =
-                new SelectCustomerService(reader, writer, clearer, new List<Customer>());
+                new SelectCustomerService(reader, writer, new List<Customer>());
             CustomerAccountService customerAccountService = new CustomerAccountService(accountBalance: 0.00M,
-                forename: "John", surname: "Smith", clearer, writer, reader,
+                forename: "John", surname: "Smith", writer, reader,
                 new ReturnToMainMenuService(shopUi, reader));
             AddItemsService addItemsService = new AddItemsService(shopLogic, writer);
             IDescriber bookDescriber = new Book();
             IDescriber cupDescriber = new Cup();
             IDescriber sweetDescriber = new Sweet();
 
-            Shop shoppe = new Shop(writer, clearer, isOpen: true, shopUi, shopLogic, selectCustomerService,
+            Shop shoppe = new Shop(writer, isOpen: true, shopUi, shopLogic, selectCustomerService,
                 customerAccountService, addItemsService);
             shoppe.Open();
         }

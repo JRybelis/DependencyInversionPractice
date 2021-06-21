@@ -8,6 +8,7 @@ namespace Shop_2._0.Interfaces
 {
     public interface IWriter
     {
+        void Clear();
         void Write(string input);
     }
 }

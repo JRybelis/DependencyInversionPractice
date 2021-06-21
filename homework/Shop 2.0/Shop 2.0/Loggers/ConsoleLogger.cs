@@ -7,8 +7,12 @@ using Shop_2._0.Interfaces;
 
 namespace Shop_2._0.Loggers
 {
-    public class ConsoleLogger : IWriter, IReader, IClearer
+    public class ConsoleLogger : IWriter, IReader 
     {
+        public void Clear()
+        {
+            Console.Clear();
+        }
         public void Write(string input)
         {
             Console.WriteLine(input);
@@ -17,11 +21,6 @@ namespace Shop_2._0.Loggers
         public string Read()
         {
             return Console.ReadLine();
-        }
-
-        public void Clear()
-        {
-            Console.Clear();
         }
     }
 }
