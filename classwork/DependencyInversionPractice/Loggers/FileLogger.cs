@@ -13,7 +13,7 @@ namespace DependencyInversionPractice.Loggers
         public void Write(string input)
         {
             // File path:
-            File.WriteAllText("E:/Dokumentai/Jokubo_dokumentai/mokslai/Coding/BIT_FSWB/C#/dotNetSpecialisation/lesson5/classwork/DependencyInversionPractice/outputFile.txt", input);
+            File.WriteAllText("/home/jokubas/dotNetProjects/dotNetSpecialisation/lesson5/classwork/DependencyInversionPractice/outputFile.txt", input);
         }
     }
 }

@@ -44,7 +44,6 @@ namespace Shop_2._0.Services.CustomerServices
                         _writer.Write("Please supply a forename, followed by a surname.");
                         throw new ArgumentNullException(e.Message);
                     }
-                    
                 }
             
                 string firstNameToCheck = nameToCheck[0];

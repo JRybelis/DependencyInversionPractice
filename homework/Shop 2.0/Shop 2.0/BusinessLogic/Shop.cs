@@ -21,7 +21,6 @@ namespace Shop_2._0.BusinessLogic
 
         public Shop(IWriter writer, bool isOpen, ShopUi shopUi, ShopLogic shopLogic, SelectCustomerService selectCustomerService, CustomerAccountService customerAccountService, AddItemsService addItemsService)
         {
-            
             _writer = writer;
             _isOpen = isOpen;
             _shopUi = shopUi;
@@ -33,10 +32,10 @@ namespace Shop_2._0.BusinessLogic
        
         public void Open()
         {
-            if (_isOpen)
-            {
-                throw new Exception("The shop manager app is already running.");
-            }
+            //if (_isOpen)
+            //{
+            //    throw new Exception("The shop manager app is already running.");
+            //}
             _isOpen = true;
             _writer.Write("Welcome to Lancaster Sweet Shoppe!");
             

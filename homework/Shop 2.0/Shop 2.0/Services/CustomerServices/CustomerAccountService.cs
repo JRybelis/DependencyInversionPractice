@@ -50,7 +50,5 @@ namespace Shop_2._0.Services.CustomerServices
             _writer.Write($"The deposit of {topUpAmount} has been accepted.");
             DisplayAccountBalance();
         }
-
-        
     }
 }
