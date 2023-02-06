@@ -32,10 +32,10 @@ namespace Shop_2._0.BusinessLogic
        
         public void Open()
         {
-            //if (_isOpen)
-            //{
-            //    throw new Exception("The shop manager app is already running.");
-            //}
+            if (_isOpen)
+            {
+                throw new Exception("The shop manager app is already running.");
+            }
             _isOpen = true;
             _writer.Write("Welcome to Lancaster Sweet Shoppe!");
             
